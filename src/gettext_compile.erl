@@ -320,7 +320,7 @@ get_epot_data() ->
 
 mk_epot_fname(Gettext_App_Name, GtxtDir) ->
     filename:join([GtxtDir, ?LANG_DIR, Gettext_App_Name,
-                   ?EPOT_TABLE, ".dets"]).
+                   [?EPOT_TABLE, ".dets"]]).
 
 open_po_file(Gettext_App_Name, GtxtDir, DefLang) ->
     DefDir = filename:join([GtxtDir, ?LANG_DIR, Gettext_App_Name, DefLang]),
