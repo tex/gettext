@@ -271,7 +271,7 @@ get_default_lang(CallBackMod) ->
     end.
 
 db_filename(TableName, GettextDir) ->
-    filename:join(GettextDir,  atom_to_list(TableName) ++ ".dets").
+    filename:join([GettextDir, ?LANG_DIR, [TableName, ".dets"]]).
 
 create_db(TableName, GettextDir) ->
     create_db(TableName, GettextDir, db_filename(TableName, GettextDir)).
