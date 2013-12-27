@@ -37,8 +37,8 @@
 -include("gettext_internal.hrl").
 
 
--define(TABLE_NAME, gettext_server_db).
 -define(ROOT_DIR, filename:join([gettext_server:gettext_dir(), ?LANG_DIR])).
+-define(TABLE_NAME, filename:join([?ROOT_DIR, [gettext_server_db, ".dets"]])).
 -define(ENDCOL, 72).
 -define(PIVOT, 4).
 -define(SEP, $\s).
