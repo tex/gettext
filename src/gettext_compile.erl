@@ -1,3 +1,4 @@
+%% -*- coding: latin-1 -*-
 %% -------------------------------------------------------------------------
 %% Permission is hereby granted, free of charge, to any person obtaining a
 %% copy of this software and associated documentation files (the
@@ -6,10 +7,10 @@
 %% distribute, sublicense, and/or sell copies of the Software, and to permit
 %% persons to whom the Software is furnished to do so, subject to the
 %% following conditions:
-%% 
+%%
 %% The above copyright notice and this permission notice shall be included
 %% in all copies or substantial portions of the Software.
-%% 
+%%
 %% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
 %% OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 %% MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
@@ -90,12 +91,12 @@ escape_chars(Str) ->
     F = fun($", Acc)  -> [$\\,$"|Acc];
            ($\\, Acc) -> [$\\,$\\|Acc];
            ($\n, Acc) -> [$\\,$n|Acc];
-	   (C, Acc)   -> [C|Acc] 
+	   (C, Acc)   -> [C|Acc]
 	end,
     lists:foldr(F, [], Str).
 
 
-%%% Split the string into substrings, 
+%%% Split the string into substrings,
 %%% aligned around a specific column.
 get_line(Str) ->
     get_line(Str, ?SEP, 1, ?ENDCOL, []).
@@ -136,7 +137,7 @@ find_end([H|T], Sep, N, Pivot, Acc) ->
     find_end(T, Sep, N+1, Pivot, [H|Acc]);
 find_end([], _Sep, _N, _Pivot, Acc) ->
     {true, Acc, []}.
-    
+
 reverse_tape(Acc, Str) ->
     reverse_tape(Acc, Str, ?SEP).
 
@@ -156,7 +157,7 @@ split_string([H|T], End, N, Acc) when N < End ->
     split_string(T, End, N+1, [H|Acc]);
 split_string([], _End, _N, Acc) ->
     {lists:reverse(Acc), []}.
-    
+
 %%%fmt_fileinfo(Finfo) ->
 %%%    F = fun({Fname,LineNo}, Acc) ->
 %%%		Fname ++ ":" ++ to_list(LineNo) ++ [$\s|Acc]
@@ -193,7 +194,7 @@ mk_header(true  = _UseOrigHeader, _LC) ->
         "\"Content-Type: text/plain; charset=iso-8859-1\\n\"\n"
         "\"Content-Transfer-Encoding: 8bit\\n\"\n".
 
- 
+
 %%% --------------------------------------------------------------------
 %%% NB: We assume that the surrounding code does some preparations:
 %%%
@@ -213,7 +214,7 @@ parse_transform(Form,Opts) ->
 	    {Gettext_App_Name, GtxtDir, _} = get_env(),
 	    open_epot_file(Gettext_App_Name, GtxtDir),
 	    ?debug( "--- Opts --- ~p~n",[Opts]),
-	    ?debug("--- Env --- isd_type=~p , gettext_dir=~p~n", 
+	    ?debug("--- Env --- isd_type=~p , gettext_dir=~p~n",
 		   [Gettext_App_Name,GtxtDir]),
             try pt(Form, Opts) after close_epot_file() end,
 	    Form;
@@ -296,7 +297,7 @@ while(0,T,_,_) ->
 
 
 dump("", _) -> ok;
-dump(Str,L) -> 
+dump(Str,L) ->
     Fname = get(fname),
     Finfo = get_file_info(Str),
     dets:insert(?EPOT_TABLE, {Str, [{Fname,L}|Finfo]}).
@@ -336,7 +337,3 @@ to_list(A) when is_atom(A)    -> atom_to_list(A);
 to_list(I) when is_integer(I) -> integer_to_list(I);
 to_list(B) when is_binary(B)  -> binary_to_list(B);
 to_list(L) when is_list(L)    -> L.
-
-
-
-
