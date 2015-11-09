@@ -193,7 +193,7 @@ parse_po(Fname) ->
 %% @doc Parse a PO-file given as a binary.
 
 parse_po_bin(Bin) ->
-    parse_po_file(to_list(Bin)).
+    parse_po_file(unicode:characters_to_list(Bin)).
 
 parse_po_file("msgid" ++ T) ->
     {Key, R0} = get_po_string(T),
